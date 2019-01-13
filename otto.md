@@ -26,19 +26,21 @@ METHOD：表示Target的注解为方法。
 ```
 ::此功能需要先将实现该函数的类register进Bus单例类中。::
 
-2. 类Subscribe，此类可以将函数标识为订阅者，用来接收消息。源码如下： ```
+2. 类Subscribe，此类可以将函数标识为订阅者，用来接收消息。源码如下：
+```
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Subscribe {
-} ```
+}
+```
 使用如下：
 ```
-	  @Subscribe
-    public void receiveMessage(String msg) {
-    }
+@Subscribe
+public void receiveMessage(String msg) {
+}
 ```
 
-3. 类AnnotatedHandlerFinder，此类用来查找某类中所有用Produce或Subscribe注释的方法，并保存在ConcurrentMap类型的结构中。 此类中核心方法是loadAnnotatedMethods，来加载参数类listenerClass中所有Annotation为Produce或Subscribe的方法。
+3. 类AnnotatedHandlerFinder，此类用来查找某类中所有用Produce或Subscribe注释的方法，并保存在ConcurrentMap类型的结构中。此类中核心方法是loadAnnotatedMethods，来加载参数类listenerClass中所有Annotation为Produce或Subscribe的方法。
 ```
 private static void loadAnnotatedMethods(Class<?> listenerClass,
       Map<Class<?>, Method> producerMethods, Map<Class<?>, Set<Method>> subscriberMethods) {
