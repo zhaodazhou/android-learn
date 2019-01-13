@@ -116,6 +116,7 @@ private static void loadAnnotatedMethods(Class<?> listenerClass,
 在4处：如果方法被Annotation为Produce类型，则进入相应逻辑处理，对该方法的参数（只能是0个）、函数返回类型（不能为Void、只能为concrete class type）、方法访问类型（只能是public）、是否被注册过进行判断，都通过，则将该方法存入`Map<Class<?>, Method>`中。
 由各自存入的结构中看，一个类中，Produce方法，只能有一个，而Subscribe方法可以有多个。 
 5. 类Bus，一般继承此类，实现单例类。用来register、unregister、post等操作。
+
 **方法register**主要内容分如下几部分：
 ```
 Map<Class<?>, EventProducer> foundProducers = handlerFinder.findAllProducers(object); // 1 查找类中所有的Produce注释的方法
